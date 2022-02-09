@@ -1,0 +1,11 @@
+name: btruter
+root: ~/
+
+windows:
+  - main:
+      layout: main-vertical
+      panes:
+        - clear; /usr/bin/neofetch
+        - /usr/bin/htop
+        - tmux resize-pane -x 100 -t 0; /usr/bin/cmatrix
+post:
