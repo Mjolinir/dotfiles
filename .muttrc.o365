@@ -1,4 +1,5 @@
 ## Basic configuration
+# https://github.com/ork/mutt-office365
 
 source "~/.mutt/user"
 
