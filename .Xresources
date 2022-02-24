@@ -1,0 +1,47 @@
+!! Let pywal govern colors
+#include ".cache/wal/colors.Xresources"
+
+!! XFT (XFREETYPE)
+
+Xft.dpi: 96
+Xft.antialias: true
+Xft.hinting: true
+Xft.rgba: rgb
+Xft.autohint: false
+Xft.hintstyle: hintslight
+Xft.lcdfilter: lcddefault
+
+!! URxvt
+
+!URxvt.font:                       9x15,xft:TerminessTTFNerdFontMono
+URxvt.font:                       9x15,xft:Source Code Pro for Powerline:pixelsize=16,xft:PowerlineSymbols:pixelsize=16
+
+URxvt.depth:                      32
+!URxvt*geometry:			  160x30
+urxvt*background:		  rgba:1111/1111/1111/dddd
+URxvt*scrollBar:                  false
+URxvt*cursorBlink:                true
+URxvt*saveLines:                  10000
+URxvt*url-launcher:               firefox
+
+URxvt.secondaryScreen:            true
+URxvt.secondaryScroll:            false
+URxvt.secondaryWheel:             true
+
+URxvt*skipBuiltinGlyphs:          true
+
+URxvt*jumpScroll:                 true
+URxvt*skipScroll:                 false
+
+URxvt*scrollTtyOutput:            false
+URxvt*scrollWithBuffer:           true
+URxvt*scrollTtyKeypress:          true
+
+URxvt.keysym.Home:		  \033[1~
+URxvt.keysym.End:		  \033[4~
+URxvt.keysym.KP_Home:		  \033[1~
+URxvt.keysym.KP_End:		  \033[4~
+
+
+!! OTHER
+username			  brian
