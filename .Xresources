@@ -72,7 +72,7 @@ URxvt*cursorBlink:                true
 !URxvt*background:                 black
 !URxvt*background:                 rgba:1111/1111/1111/dddd
 URxvt*foreground:                 grey
-URxvt*saveLines:                  5000
+URxvt*saveLines:                  50000
 
 ! for 'fake' transparency (without Compton) uncomment the following three lines
 ! URxvt*inheritPixmap:            true
@@ -235,5 +235,4 @@ URxvt.keysym.Shift-Control-Down:  \033[1;6B
 ! -xos4-terminus-bold-r-normal--24-240-72-72-c-120-iso10646-1
 ! -xos4-terminus-bold-r-normal--28-280-72-72-c-140-iso10646-1
 ! -xos4-terminus-bold-r-normal--32-320-72-72-c-160-iso10646-1
-username: brian
 username: brian
