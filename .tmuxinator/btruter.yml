@@ -1,0 +1,12 @@
+name: btruter
+root: ~/
+
+windows:
+  - main:
+      layout: main-vertical
+      panes:
+        - clear; ~/bin/pukeskull
+        - htop
+#        - /usr/bin/tmux select-pane -l; tmux resize-pane -x 100 -t 0; /usr/bin/cmatrix
+        - tmux resize-pane -x 100 -t 0; clear; cmatrix
+post:
