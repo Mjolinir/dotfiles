@@ -1,0 +1,31 @@
+image=DP-3:/home/kurse/.local/share/wallpapers/An-intricate-portrayal-of-Norse-deities-featuring-Odins-ravens-Huginn-and-Muninn-soaring-above.jpg
+image=DP-2:/home/kurse/.local/share/wallpapers/An-ornate-depiction-of-Norse-gods-and-goddesses-with-Odins-ravens-Huginn-and-Muninn-soaring-overhead.jpg
+#image=DP-1:/home/kurse/.local/share/wallpapers/An-intricate-portrayal-of-Norse-deities-featuring-Odins-ravens-Huginn-and-Muninn-soaring-above.jpg
+
+# Apply a slight blur effect to the background image
+#effect-blur 7x5
+
+# Display the current time and date
+#clock
+#timestr=%H:%M
+#datestr=%a, %e %B
+
+# Customize the password indicator ring
+#indicator
+#indicator-radius 120
+#indicator-thickness 15
+
+# Color overrides (format: #RRGGBBAA)
+#inside-color=00000088
+#ring-color=ffffffaa
+#key-hl-color=88aaeeff
+#line-color=00000000
+#inside-clear-color=00000088
+#ring-clear-color=55aa55aa
+#inside-wrong-color=00000088
+#ring-wrong-color=aa5555aa
+
+# Miscellaneous
+#show-failed-attempts
+#ignore-empty-password
+#daemonize

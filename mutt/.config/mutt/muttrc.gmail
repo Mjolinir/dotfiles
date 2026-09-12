@@ -1,0 +1,37 @@
+set index_format="%4C %Z %{%b %d} %-25.25L (%?l?%4l&%4c?) %s"
+
+set realname = "Brian Truter"
+set from = "btruter@gmail.com"
+set use_from = yes
+set envelope_from = yes
+
+set smtp_url = "smtps://btruter@gmail.com@smtp.gmail.com:587/"
+set smtp_pass = "dyzq kvqh oflu tuxs"
+set imap_user = "btruter@gmail.com"
+set imap_pass = "dyzq kvqh oflu tuxs"
+set folder = "imaps://imap.gmail.com:993"
+set spoolfile = "+INBOX"
+set ssl_force_tls = yes
+set record = "+[Gmail]/Sent Mail"
+set postponed = "+[Gmail]/Drafts"
+set mbox="imaps://imap.gmail.com/[Gmail]/All Mail"
+set trash="imaps://imap.gmail.com/[Gmail]/Trash"
+set sort = reverse-date-received
+set header_cache = "~/.mutt/cache/headers"
+set message_cachedir = "~/.mutt/cache/bodies"
+set certificate_file = "~/.mutt/certificates"
+
+# G to get mail
+bind index G imap-fetch-mail
+set editor = "vim"
+set charset = "utf-8"
+bind editor <space> noop
+macro index,pager y "<save-message>=[Gmail]/All Mail<enter><enter>" "Archive"
+macro index,pager d "<save-message>=[Gmail]/Trash<enter><enter>" "Trash"
+macro index gi "<change-folder>=INBOX<enter>" "Go to inbox"
+macro index ga "<change-folder>=[Gmail]/All Mail<enter>" "Go to all mail"
+macro index gs "<change-folder>=[Gmail]/Sent Mail<enter>" "Go to sent mail"
+macro index gd "<change-folder>=[Gmail]/Drafts<enter>" "Go to drafts"
+macro index gt "<change-folder>=[Gmail]/Trash<enter>" "Go to trash"
+
+#set imap_list_subscribed = yes

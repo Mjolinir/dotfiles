@@ -1,0 +1,7 @@
+set sort = reverse-date-received
+set folder="~/Mail"
+set mbox="~/Mail"
+set mbox_type=Maildir
+set postponed="+Drafts"
+set record="+Sent"
+set spoolfile="~/Mail"

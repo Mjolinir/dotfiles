@@ -1,0 +1,345 @@
+# Sway config file (v4)
+################################################################################
+exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway XDG_SESSION_TYPE=wayland
+################################################################################
+# Look/Feel
+################################################################################
+# Configure border style <normal|1pixel|pixel xx|none|pixel>
+default_border pixel 4
+default_floating_border pixel 4
+
+# Font for window titles.
+font pango:Cascadia Mono NF 12
+font pango:Cascadia Code NF 12
+font pango:Source Code Pro 12
+
+# switch to workspace with urgent window automatically
+for_window [urgent=latest] focus
+
+# workspace back and forth (with/without active container)
+workspace_auto_back_and_forth yes
+set $QT_QPA_PLATFORMTHEME qt6ct
+include ~/.config/sway/colors.conf
+
+# Theme colors
+# class                   border  backgr. text    indic.  child_border
+client.focused          $acc     $bg     $fg     $urg     $sel
+client.focused_inactive $acc     $bg     $fg     $urg     $acc
+client.unfocused        $acc     $bg     $fg     $urg     $acc
+client.urgent           $acc     $bg     $urg    $urg     $acc
+client.placeholder      $acc     $bg     $fg     $urg     $acc
+
+client.background       $bg
+
+
+################################################################################
+# Window/Desktop Environment Manipulation Hotkeys
+################################################################################
+
+# Set mod key (Mod1=<Alt>, Mod4=<Super>)
+set $mod Mod4
+
+# Use Mouse+$mod to drag floating windows
+floating_modifier $mod
+# kill focused window
+bindsym $mod+Shift+q kill
+#show cheat sheet
+#bindsym $mod+h exec markdown_previewer ~/Projects/dots/CHEATS.md
+
+#Screenshots
+bindsym Print exec grimshot copy area
+bindsym Shift+Print exec grimshot save active
+
+# Screen brightness controls
+# bindsym XF86MonBrightnessUp exec "xbacklight -inc 10; notify-send 'brightness up'"
+# bindsym XF86MonBrightnessDown exec "xbacklight -dec 10; notify-send 'brightness down'"
+
+# change focus
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split orientation
+bindsym $mod+q split toggle
+
+# toggle fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# toggle sticky
+bindsym $mod+Shift+s sticky toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# move the currently focused window to the scratchpad
+bindsym $mod+Shift+minus move scratchpad
+
+# Show the next scratchpad window or hide the focused scratchpad window.
+# If there are multiple scratchpad windows, this command cycles through them.
+bindsym $mod+minus scratchpad show
+
+# Resize window (you can also use the mouse for that)
+#bindsym $mod+r mode "resize"
+#mode "resize" {
+#        bindsym Left resize shrink width 5 px or 5 ppt
+#        bindsym Down resize grow height 5 px or 5 ppt
+#        bindsym Up resize shrink height 5 px or 5 ppt
+#        bindsym Right resize grow width 5 px or 5 ppt
+
+        # exit resize mode: Enter or Escape
+#        bindsym Return mode "default"
+#        bindsym Escape mode "default"
+#}
+
+# reload the configuration file
+bindsym $mod+Shift+r reload
+
+bindsym $mod+Shift+e exec "swaynag -t warning -m 'Do you really want to exit Sway? This will end your session.' -b 'Yes, exit Sway' 'swaymsg exit'"
+
+# Trigger system menu with swaynag
+bindsym $mod+0 exec swaynag \
+  -t warning \
+  -m "System Menu: Choose an action" \
+  -b "Lock" "swaylock -f -c 000000" \
+  -b "Exit" "swaymsg exit" \
+  -b "Reboot" "systemctl reboot" \
+  -b "Shutdown" "systemctl poweroff"
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        #bindsym j resize shrink width 10 px or 10 ppt
+        #bindsym k resize grow height 10 px or 10 ppt
+        #bindsym l resize shrink height 10 px or 10 ppt
+        #bindsym semicolon resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape or $mod+r
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+################################################################################
+# Application Launch Hotkeys
+################################################################################
+
+#terminal
+bindsym $mod+Return exec konsole
+#web browser
+bindsym $mod+Shift+Return exec firefox
+#file manager
+bindsym $mod+F1 exec dolphin
+#text editor
+bindsym $mod+F2 exec code
+#Rofi Launcher
+bindsym $mod+d exec rofi -theme material.rasi -show drun
+
+# Lock Screen
+bindsym $mod+l exec swaylock -f
+
+# Automatically lock after 300 seconds of inactivity
+exec swayidle -w \
+     timeout 900 'swaylock -f' \
+     timeout 1800 'swaymsg "output * power off"' \
+          resume 'swaymsg "output * power on"' \
+before-sleep 'swaylock -f'
+
+################################################################################
+# Autostart Applications
+################################################################################
+
+# Config file updates
+#exec_always test -f ~/.Xresources && xrdb -merge ~/.Xresources
+#exec_always test -f ~/.cache/wal/colors.Xresources && xrdb -merge ~/.cache/wal/colors.Xresources
+exec_always import-gsettings
+exec /usr/bin/wl-paste --type text --watch cliphist store
+exec /usr/bin/wl-paste --type image --watch cliphist store
+
+# Userland applications
+exec sh -lc '[ -x /usr/libexec/pam_kwallet_init ] && /usr/libexec/pam_kwallet_init
+exec kded6
+exec /usr/libexec/kf6/polkit-kde-authentication-agent-1
+exec waytrogen --restore
+
+# bar applets
+exec /usr/bin/nm-applet &
+exec /usr/bin/insync start
+exec ckb-next --background
+
+################################################################################
+# Workspace Settings
+################################################################################
+
+# Workspace names
+# to display names or symbols instead of plain workspace numbers you can use
+# something like: set $ws1 1:mail
+#                 set $ws2 2:
+set $ws1 1:HOME
+set $ws2 2:GAMES
+set $ws3 3:WEB
+set $ws4 4:APPS
+set $ws5 5:EMAIL
+set $ws6 6:CODE
+
+#output DP-1 pos 5120 0
+output DP-2 pos 2560 0
+output DP-3 pos 0 0
+
+workspace "1:HOME" output DP-2
+workspace "2:APPS" output DP-3
+workspace "3:WEB" output DP-2
+workspace "4:GAMES" output DP-3
+workspace "5:EMAIL" output DP-3
+workspace "6:CODE" output DP-2
+
+
+# switch to workspace
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+
+# Move focused container to workspace
+bindsym $mod+Ctrl+1 move container to workspace $ws1
+bindsym $mod+Ctrl+2 move container to workspace $ws2
+bindsym $mod+Ctrl+3 move container to workspace $ws3
+bindsym $mod+Ctrl+4 move container to workspace $ws4
+bindsym $mod+Ctrl+5 move container to workspace $ws5
+bindsym $mod+Ctrl+6 move container to workspace $ws6
+
+# Move to workspace with focused container
+bindsym $mod+Shift+1 move container to workspace $ws1; workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2; workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3; workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4; workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5; workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6; workspace $ws6
+
+################################################################################
+# Specific Application settings
+################################################################################
+
+# Open applications on specific workspaces
+# assign [class="Thunderbird"] $ws1
+assign [app_id="firefox"] $ws3
+assign [app_id="google-chrome-stable"] $ws3
+
+# Open specific applications in floating mode
+#for_window [app_id="firefox"] border normal 5; client.focused $acc $bg $fg $urg $sel
+for_window [title="alsamixer"] floating enable
+for_window [class="GParted"] floating enable
+for_window [app_id="foot"] opacity 0.9
+for_window [app_id="qt5ct"] floating enable sticky enable
+for_window [app_id="qt6ct"] floating enable sticky enable
+for_window [class="Simple-scan"] floating enable
+for_window [class="(?i)System-config-printer.py"] floating enable
+hide_edge_borders both
+
+# Brian's
+for_window [class="com-atlauncher-App"] floating enable
+for_window [class="CurseForge"] move container to workspace $ws2
+for_window [class="steam"] move container to workspace $ws2
+for_window [class="Minecraft Launcher"] floating enable, resize set 800 600, move container to workspace $ws2
+for_window [class="Minecraft* 1.*"] move container to workspace $ws3
+for_window [class="steam_app_*"] move container to workspace $ws3
+for_window [app_id="pcmanfm-qt"] floating enable, resize set 800 600, move position mouse
+for_window [app_id="dolphin"] floating enable, resize set 1200 800, move position mouse, opacity 1.0
+for_window [class="notepad++.exe"] floating enable, resize set 1200 768, move position mouse
+for_window [app_id="vncviewer"] floating enable, resize set 1024 768, move position mouse
+for_window [app_id="r2modman"] floating enable, resize set 1024 768
+for_window [app_id="pavucontrol"] floating enable, resize set 1024 768
+for_window [app_id="steamwebhelper"] floating enable, resize set 1024 768, move position mouse, move container to workspace $ws2
+
+################################################################################
+# Sway-gaps
+################################################################################
+
+# Set inner/outer gaps
+gaps inner 10
+gaps outer 10
+
+# Additionally, you can issue commands with the following syntax. This is useful to bind keys to changing the gap size.
+# gaps inner|outer current|all set|plus|minus <px>
+# gaps inner all set 10
+# gaps outer all plus 5
+
+# Smart gaps (gaps used if only more than one container on the workspace)
+#smart_gaps on
+
+# Smart borders (draw borders around container only if it is not the only container on this workspace)
+# on|no_gaps (on=always activate and no_gaps=only activate if the gap size to the edge of the screen is 0)
+smart_borders on
+
+# Press $mod+Shift+g to enter the gap mode. Choose o or i for modifying outer/inner gaps. Press one of + / - (in-/decrement for current workspace) or 0 (remove gaps for current workspace). If you also press Shift with these keys, the change will be global for all workspaces.
+set $mode_gaps Gaps: (o) outer, (i) inner
+set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
+set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
+bindsym $mod+Shift+g mode "$mode_gaps"
+
+mode "$mode_gaps" {
+        bindsym o      mode "$mode_gaps_outer"
+        bindsym i      mode "$mode_gaps_inner"
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+mode "$mode_gaps_inner" {
+        bindsym plus  gaps inner current plus 5
+        bindsym minus gaps inner current minus 5
+        bindsym 0     gaps inner current set 0
+
+        bindsym Shift+plus  gaps inner all plus 5
+        bindsym Shift+minus gaps inner all minus 5
+        bindsym Shift+0     gaps inner all set 0
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+mode "$mode_gaps_outer" {
+        bindsym plus  gaps outer current plus 5
+        bindsym minus gaps outer current minus 5
+        bindsym 0     gaps outer current set 0
+
+        bindsym Shift+plus  gaps outer all plus 5
+        bindsym Shift+minus gaps outer all minus 5
+        bindsym Shift+0     gaps outer all set 0
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bar {
+    swaybar_command waybar
+}

@@ -1,0 +1,58 @@
+!! Let pywal govern colors
+#include ".cache/wal/colors.Xresources"
+
+!! XFT (XFREETYPE)
+
+Xft.dpi: 96
+Xft.antialias: true
+Xft.hinting: true
+Xft.rgba: rgb
+Xft.autohint: false
+Xft.hintstyle: hintslight
+Xft.lcdfilter: lcddefault
+
+!! URxvt
+
+URxvt.font:                       xft:DejaVu Sans Mono:size=10
+
+URxvt.depth:                      32
+!!urxvt*background:		  rgba:0000/0000/0200/c800
+urxvt*transparent:		  true
+urxvt*shading:			  30
+URxvt*scrollBar:                  false
+URxvt.scrollBar:                  false
+URxvt*cursorBlink:                true
+URxvt*saveLines:                  10000
+URxvt*url-launcher:               /usr/bin/firefox
+
+URxvt.secondaryScreen:            true
+URxvt.secondaryScroll:            false
+URxvt.secondaryWheel:             true
+
+URxvt*skipBuiltinGlyphs:          true
+
+URxvt*jumpScroll:                 true
+URxvt*skipScroll:                 false
+
+URxvt*scrollTtyOutput:            false
+URxvt*scrollWithBuffer:           true
+URxvt*scrollTtyKeypress:          true
+
+URxvt*perl-ext-common:            default,selection-to-clipboard,pasta,matcher,-confirm-paste,resize-font
+URxvt*matcher.button:             1
+URxvt.keysym.C-Down:		  resize-font:smaller
+URxvt.keysym.C-Up:		  resize-font:bigger
+
+URxvt.clipboard.autocopy:	  true
+URxvt.keysym.M-c:		  perl:clipboard:copy
+URxvt.keysym.M-v:		  perl:clipboard:paste
+
+URxvt.saveLines:                  10000
+URxvt.scrollWithBuffer:           true
+
+
+!! OTHER
+username: kurse
+
+!! Dont type ~ or $HOME below
+URxvt.perl-lib: /home/kurse/.urxvt/ext/
